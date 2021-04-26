@@ -1,0 +1,49 @@
+<!-- <div class="side-nav">
+  <div class="accordion" style="text-transform: uppercase">
+    <mat-accordion>
+        <mat-expansion-panel #matAcord hideToggle="true" *ngFor="let menu of userMenus let i = index" (opened)="openPanel(i)"
+        (closed)="closePanel(i)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{menu.title}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div style="font-size: 12px; padding-bottom: 5px; cursor: pointer;" *ngFor="let sm of menu.sub_menu">
+                {{sm.title}}
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div> -->
+
+<div style="height: 100%; background-color: #023e8a;">
+    <div style="height: 100%; border-right: 1px solid #48cae4">
+        <div class="logo-button" (click)="openMenuSideNav(menu)" *ngFor="let menu of userMenus let i = index">
+            <div>
+                <img style="height: 50px; margin: 15px" src="../../../assets/menu_logos/dummy-img.png">
+            </div>
+        </div>
+    </div>
+    <mat-sidenav-container class="side-nave-open" [style.marginTop.px]="50" (backdropClick)="closeMenuSideNav()">
+        <mat-sidenav class="sidenav" [ngClass]="{'side-nav-close' : sidenavClosed}" #userMenuNav class="" [mode]="'over'" [fixedInViewport]="true" [fixedTopGap]="50" style="left: 100px; background-color:#0077b6; width: 35%; color: #fff;">
+            <div class="text-one">
+                {{sidenavMenu?.menu_name}}
+            </div>
+            <div *ngIf="sidenavMenu?.user_submenu.length != 0" (clickOutside)="closeOpenedPanels()">
+                    <mat-accordion class="accordion">
+                        <mat-expansion-panel #matAcord hideToggle="true" *ngFor="let submenu of sidenavMenu?.user_submenu let i = index" (opened)="openPanel(i)"
+                        (closed)="closePanel(i)">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{submenu.menu_name}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="panel-menu" (click)="sm.user_submenu.length == 0 && navigate(sm)" *ngFor="let sm of submenu.user_submenu">
+                                {{sm.menu_name}}
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+            </div>
+        </mat-sidenav>
+    </mat-sidenav-container>
+</div>

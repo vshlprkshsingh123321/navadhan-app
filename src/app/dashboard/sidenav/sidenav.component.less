@@ -1,0 +1,112 @@
+// .side-nav {
+//     height: calc(100vh - 50px);
+//     box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.14); 
+//     background-color: #48cae4;
+//     opacity: 0.7;
+// }
+// .mat-expanded {
+//     background-color: #90e0ef !important;
+//     // color: black;
+// }
+// .mat-expansion-panel-header-title {
+//     // color: black;
+//     font-size: 18px;
+//     font-weight: 500;
+// }
+// .mat-expansion-panel-spacing {
+//     margin: 0px;
+// }
+// .mat-expansion-panel {
+//     box-shadow: unset !important;
+//     border-radius: unset !important;
+//     background-color: #48cae4;
+//     // opacity: 0.7;
+// }
+
+.logo-button {
+    display: flex; 
+    justify-content: center;
+    cursor: pointer;
+}
+.logo-button:hover {
+    background-color: #0077b6;
+}
+
+.side-nave-open{
+	// position: absolute;
+    position: inherit;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    .sidenav {
+        width: 35%;
+        padding: 20px;
+    }
+}
+
+.side-nav-close {
+    z-index: -1 !important;
+}
+
+// .mat-drawer-container{
+//     top: 50px !important;
+// } 
+.side-nave-open{
+    ::ng-deep {
+        .mat-drawer {
+            box-shadow: unset !important;
+        }
+        .mat-drawer-backdrop {
+            top: 50px !important;
+            left: 100px !important;
+            background: rgba(0, 0, 0, 0.1) !important;
+        }
+    }
+}
+
+.text-one {
+    font-size: 18px;
+    padding: 20px;
+}
+
+.mat-expansion-panel {
+    background-color: #0077b6;
+}
+
+.accordion {
+    ::ng-deep {
+      .mat-expansion-panel-content {
+          background: #0096c7 !important;
+      }
+      .mat-expansion-panel-body{
+          padding: 0px;
+      } 
+    }
+}
+
+.panel-menu {
+    font-size: 12px; 
+    padding: 8px 24px 8px 54px; 
+    cursor: pointer;
+    color: #fff;
+}
+
+.panel-menu:hover {
+    background: #00b4d8;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+    height: 34px;
+}
+
+.mat-expansion-panel-header-title {
+    color: #fff !important;
+}
+
+.mat-expansion-panel-header:hover {
+    background-color: #0096c7 !important;
+}
+
+

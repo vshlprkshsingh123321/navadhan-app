@@ -1,0 +1,47 @@
+<div style="padding: 20px;">
+    <div style="font-size: 18px; font-weight: 500">
+        Download Lead Tracker
+      </div>
+      <div style="padding: 10px;">
+        <div style="display: flex; align-items: center;">
+           <div style="width: 100px;">Branch</div>
+           <div>
+              <mat-form-field class="form-field-background" appearance="fill">
+                 <mat-select [(value)]="selected" [formControl]="branchSelect">
+                 <mat-option *ngFor="let option of branchData" [value]="option.branch_id">{{option.branch_name}}</mat-option>
+                 </mat-select>
+              </mat-form-field>
+           </div>
+        </div>
+        <div style="display: flex; padding-bottom: 15px;">
+           <div style="display: flex; align-items: center; margin-right: 30px;">
+              <div style="width: 100px;">From</div>
+              <div>
+                 <mat-form-field class="form-field-background">
+                    <mat-label>dd-mm-yyyy</mat-label>
+                    <input matInput [matDatepicker]="pickerFrom" [formControl]="fromDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFrom></mat-datepicker>
+                 </mat-form-field>
+              </div>
+           </div>
+           <div style="display: flex; align-items: center;">
+              <div style="padding-right: 10px">To</div>
+              <div>
+                 <mat-form-field class="form-field-background">
+                    <mat-label>dd-mm-yyyy</mat-label>
+                    <input matInput [matDatepicker]="pickerTo" [formControl]="toDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerTo></mat-datepicker>
+                 </mat-form-field>
+              </div>
+           </div>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+           <button class="btn-dwnld" (click)="checkBranchDownload()" matButton>Download</button>
+           <div *ngIf="branchDownload" style="padding-top: 10px; font-size: 12px; display: flex; justify-content: flex-end;">
+              <span class="anchor" (click)="downloadLeadTracker()">Open</span>
+            </div>
+        </div>
+     </div>
+</div>

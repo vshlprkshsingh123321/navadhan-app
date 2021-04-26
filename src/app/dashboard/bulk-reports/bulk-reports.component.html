@@ -1,0 +1,79 @@
+<div style="padding: 20px;">
+   <div style="font-size: 18px; font-weight: 500">
+     Pull Bulk Reports
+   </div>
+   <div style="padding: 10px;">
+      <div style="display: flex; align-items: center;">
+         <div style="width: 100px;">CSO Wise</div>
+         <div>
+            <mat-form-field class="form-field-background" appearance="fill">
+               <mat-select [(value)]="selected" [formControl]="CSOSelect">
+               <mat-option *ngFor="let option of CSOdata" [value]="option.value">{{option.name}}</mat-option>
+               </mat-select>
+            </mat-form-field>
+         </div>
+      </div>
+      <div style="display: flex; padding-bottom: 15px;">
+         <div style="display: flex; align-items: center; margin-right: 30px;">
+            <div style="width: 100px;">From</div>
+            <div>
+               <mat-form-field class="form-field-background" appearance="fill">
+                  <mat-label>dd-mm-yyyy</mat-label>
+                  <input matInput [matDatepicker]="pickerFrom">
+                  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerFrom></mat-datepicker>
+               </mat-form-field>
+            </div>
+         </div>
+         <div style="display: flex; align-items: center;">
+            <div style="padding-right: 10px">To</div>
+            <div>
+               <mat-form-field class="form-field-background" appearance="fill">
+                  <mat-label>dd-mm-yyyy</mat-label>
+                  <input matInput [matDatepicker]="pickerTo">
+                  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerTo></mat-datepicker>
+               </mat-form-field>
+            </div>
+         </div>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+         <button class="btn-dwnld" (click)="checkCSOWiseDownload('CSO')" matButton>Download</button>
+         <div *ngIf="CSODownload" style="padding-top: 10px; font-size: 12px; display: flex; justify-content: flex-end;">
+            <span class="anchor" (click)="downloadBulkCSOWise()">Open</span>
+          </div>
+      </div>
+   </div>
+   <div style="font-size: 18px; font-weight: 500; margin-top: 15px;;">
+      Household ID Wise
+    </div>
+    <div style="padding: 10px;">
+      <div style="display: flex; padding-bottom: 15px;">
+         <div style="display: flex; align-items: center; margin-right: 30px;">
+            <div style="width: 100px;">From</div>
+               <div>
+                  <mat-form-field class="">
+                    <input matInput type="text" placeholder="" [formControl]="householdIDFrom">
+                    <mat-error *ngIf="householdIDFrom.invalid">
+                      Please enter the household ID
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+         </div>
+         <div style="display: flex; align-items: center;">
+            <div style="padding-right: 10px">To</div>
+            <div>
+               <mat-form-field class="">
+                 <input matInput type="text" placeholder="" [formControl]="householdIDTo">
+                 <mat-error *ngIf="householdIDTo.invalid">
+                   Please enter the household ID
+                 </mat-error>
+               </mat-form-field>
+             </div>
+         </div>
+      </div>
+      <div>
+         <button class="btn-dwnld" matButton>Download</button>
+      </div>
+    </div>
+</div>

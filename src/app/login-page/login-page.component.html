@@ -1,0 +1,19 @@
+<div class="container">
+    <div>
+        <div class="rectangle-card">
+            <div style="font-size: 18px; font-weight: 500">Welcome,</div><br>
+            <div style="font-size: 16px;">Login to your account!</div>
+            <form [formGroup]="loginForm">
+                <mat-form-field style="width: 100%; padding-bottom: 15px;">
+                    <input matInput type="text" placeholder="Username" formControlName="username">
+                    <mat-error *ngIf="username!.invalid">{{getusernameErrorMsg()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field style="width:100%; padding-bottom: 15px;">
+                    <input matInput type="password" placeholder="Password" formControlName="password">
+                    <mat-error *ngIf="password!.invalid">{{getPasswordErrorMsg()}}</mat-error>
+                </mat-form-field>
+            </form>
+            <button matButton class="btn-success" (click)="login()">LOGIN</button>
+        </div>
+    </div>
+</div>

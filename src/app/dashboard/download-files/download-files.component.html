@@ -1,0 +1,24 @@
+<div style="padding: 20px;">
+    <div style="font-size: 18px; font-weight: 500">
+      Download Files
+    </div>
+    <div style="padding: 10px; width: 40%;">
+      <div style="padding-bottom: 15px;">
+        <mat-form-field class="" style="width: 100%;">
+          <input matInput type="text" placeholder="Household ID" [formControl]="householdID">
+          <mat-error *ngIf="householdID.invalid">
+            Please enter the household ID
+          </mat-error>
+          <mat-error *ngIf="!validID && !householdID.invalid">
+            Please enter valid household ID
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <button class="btn-dwnld" matButton (click)="checkForDownload(householdID.value)">Download</button>
+        <div *ngIf="validID" style="padding-top: 10px; font-size: 12px; display: flex; justify-content: flex-end;">
+          <span class="anchor">Open</span>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,7 @@
+<app-topnav [user]="userIsAuthenticated"></app-topnav>
+<div style="display: flex; height: calc(100vh - 50px);">
+    <app-sidenav [menuArray]="finalMenuArray" style="width:100px;"></app-sidenav>
+    <div style="background-color: #caf0f8; width: calc(100vw - 100px);">
+        <router-outlet></router-outlet> 
+    </div>
+</div>
