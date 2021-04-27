@@ -51,15 +51,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   };
 
   login() {
-    // this.users.forEach(element => {
-    //   console.log(element, this.username);
-      
-    //   if (element.username == this.username!.value && element.password == this.password!.value) {
-    //     console.log('user present');
-    //     this.router.navigate(['/dashboard']);
-    //   }
-    // });
-    this._authService.postUser();
+    if(this.loginForm.invalid) {
+      return;
+    } else {
+      let data = {
+        id : null,
+        username: this.username?.value, 
+        password : this.password?.value
+      }
+      this._authService.postUser(data);
+    }
   };
 
   getusernameErrorMsg() {

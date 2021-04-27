@@ -46,6 +46,14 @@ export class ExcelDownloadService {
     return this.http.get('http://localhost:3000/getCSO');
   }
 
+  validatehhidBulkReport(fromId: any, toId: any) {
+    let data = {
+      from_hhid: fromId,
+      to_hhid: toId
+    }
+    return this.http.post('http://localhost:3000/validate-hhids-bulk-report', data);
+  }
+
   downloadHeatmapExcel(data: any) {
     this.http.get('http://localhost:80/cb/credit_bureau_heatmap_download.php?household_number=' + data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -66,7 +74,16 @@ export class ExcelDownloadService {
   }
 
   downloadCSOWiseBulkReport(data: any) {
-    this.http.get('http://localhost:80/cb/credit_bureau_summary_dump.php?cso=' + data + '&flag=C', {
+    this.http.get('http://localhost:80/cb/credit_bureau_summary_dump.php?cso=' + data.cso + '&from_date=' + data.from_date + '&to_date=' + data.to_date +'&flag=D', {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      responseType: 'blob' 
+    }).subscribe((response) => {
+      this.downloadFile(response);
+    });
+  }
+
+  downloadhhidWiseBulkReport(data :any) {
+    this.http.get('http://localhost:80/cb/credit_bureau_summary_dump.php?from_hhid=' + data.from_hhid + '&to_hhid=' + data.to_hhid + '&flag=H', {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       responseType: 'blob' 
     }).subscribe((response) => {
@@ -85,7 +102,7 @@ export class ExcelDownloadService {
   }
 
   downloadLt(data: any) {
-    this.http.get("http://localhost:80/cb/lead_tracker_dump.php?branch_id='" + data.branch_id + "'&from_date='" + data.lt_from_date + "'&to_date='" + data.lt_to_date + "'", {
+    this.http.get("http://localhost:80/cb/lead_tracker_dump.php?branch_id=" + data.branch_id + "&from_date=" + data.lt_from_date + "&to_date=" + data.lt_to_date , {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       responseType: 'blob' 
     }).subscribe((response) => {
@@ -101,7 +118,16 @@ export class ExcelDownloadService {
 
     const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
     const url= window.URL.createObjectURL(blob);
-    window.open(url);
+    // create <a> tag dinamically
+var fileLink = document.createElement('a');
+fileLink.href = url;
+
+// it forces the name of the downloaded file
+fileLink.download = 'pdf_name';
+
+// triggers the click event
+fileLink.click();
+    // window.open(url);
   }
 
 }

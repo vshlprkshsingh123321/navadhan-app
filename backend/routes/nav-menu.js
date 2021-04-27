@@ -15,5 +15,6 @@ router.get("/getCSO", checkAuth, excelController.get_CSO_data);
 router.get("/getBranch", checkAuth, excelController.get_branch_data);
 router.post("/create-PTS-excel", checkAuth, excelController.create_data_PTS);
 router.post("/create-support-zip", checkAuth, excelController.create_support_zip);
+router.post("/validate-hhids-bulk-report", checkAuth, excelController.validate_hhids);
 
 module.exports = router;

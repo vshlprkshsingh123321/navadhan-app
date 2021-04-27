@@ -19,7 +19,7 @@
             <div>
                <mat-form-field class="form-field-background" appearance="fill">
                   <mat-label>dd-mm-yyyy</mat-label>
-                  <input matInput [matDatepicker]="pickerFrom">
+                  <input matInput [matDatepicker]="pickerFrom" [formControl]="fromDate">
                   <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                   <mat-datepicker #pickerFrom></mat-datepicker>
                </mat-form-field>
@@ -30,7 +30,7 @@
             <div>
                <mat-form-field class="form-field-background" appearance="fill">
                   <mat-label>dd-mm-yyyy</mat-label>
-                  <input matInput [matDatepicker]="pickerTo">
+                  <input matInput [matDatepicker]="pickerTo" [formControl]="toDate">
                   <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
                   <mat-datepicker #pickerTo></mat-datepicker>
                </mat-form-field>
@@ -72,8 +72,11 @@
              </div>
          </div>
       </div>
-      <div>
-         <button class="btn-dwnld" matButton>Download</button>
+      <div style="display: flex; justify-content: space-between;">
+         <button class="btn-dwnld" matButton (click)="validateHouseholdIds()">Download</button>
+         <div *ngIf="validhhids" style="padding-top: 10px; font-size: 12px; display: flex; justify-content: flex-end;">
+            <span class="anchor" (click)="downloadBulkhhidWise()">Open</span>
+          </div>
       </div>
     </div>
 </div>

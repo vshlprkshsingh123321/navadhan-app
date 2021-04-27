@@ -39,13 +39,7 @@ export class AuthenticationService {
     return this.http.get('http://localhost:3000/api/users');
   }
 
-  postUser() {
-    let data = {
-      id : null,
-      username: 'sanku',
-      name : 'xyz', 
-      password : 'Sanku@678'
-    }
+  postUser(data : any) {
     this.http.post<{token: string, userid: number}>('http://localhost:3000/login', data).subscribe((response) => {
       console.log(response);
       const token = response.token; 

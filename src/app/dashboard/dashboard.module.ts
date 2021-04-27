@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthGuard } from '../services/loginServices/auth.guard';
@@ -49,7 +49,7 @@ import { LeadTrackerComponent } from './lead-tracker/lead-tracker.component';
         PassThroughSheetComponent,
         LeadTrackerComponent
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, DatePipe],
     entryComponents: []
 })
 

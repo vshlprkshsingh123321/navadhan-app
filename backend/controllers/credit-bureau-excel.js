@@ -124,6 +124,49 @@ exports.get_CSO_data = (req, res, next) => {
     });
 };
 
+exports.validate_hhids = (req, res, next) => {
+    console.log(req.body);
+    let check_from_hhid = 0;
+    let check_to_hhid = 0;
+    let from_hhid = req.body.from_hhid;
+    let to_hhid = req.body.to_hhid;
+    con.query("select b.* from household_base_data a, credit_bureau_summary b where a.household_number = '" + from_hhid + "' and a.household_id = b.household_id", (err, result, fields) => {
+        if(result.length == 0) {
+            check_from_hhid = 0
+            res.status(404).json({
+                message: 'invalid from household id'
+            });
+        } else {
+            check_from_hhid = 1
+            con.query("select b.* from household_base_data a, credit_bureau_summary b where a.household_number = '" + to_hhid + "' and a.household_id = b.household_id", (err, result, fields) => {
+                if(result.length == 0) {
+                    check_to_hhid = 0;
+                    res.status(404).json({
+                        message: 'invalid to household id'
+                    })
+                } else {
+                    check_to_hhid = 1;
+                    if(from_hhid > to_hhid) {
+                        res.status(400).json({
+                            message: 'from household id cannot be greater than to household id'
+                        });
+                    } else {
+                        let hhids = {
+                            from_hhid: from_hhid,
+                            to_hhid: to_hhid
+                        }
+                        res.status(200).json({
+                            message: 'valid hhids',
+                            result: hhids
+
+                        });
+                    }
+                }
+            })
+        }
+    })
+}
+
 exports.get_branch_data = (req, res, next) => {
     con.query("select '-Select-' branch_name, 0 branch_id union select distinct branch_name, a.branch_id from household_base_data a, branch_master b where a.branch_id = b.branch_id order by branch_name", (err, result, fields) => {
         res.status(200).json({

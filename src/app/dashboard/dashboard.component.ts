@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       let data = response.result;
       data.map((element:any) => {
         element.user_submenu = [];
+        element.last_child = true;
       });
       console.log('added submenu empty:', data)
       this.structureMenuData(data);
@@ -49,10 +50,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     response.forEach((element: any, index: any) => {
       // console.log('each:',element);
       switch(element.menu_level){
+
         case 3:
          this.userMenu.find((el) => {
            return el.menu_id == element.parent_menu_id
          }).user_submenu.push(element);
+         this.userMenu.find((el) => {
+          return el.menu_id == element.parent_menu_id
+        }).last_child = false;
          console.log()
         //  this.userMenu.find((el) => {
         //   return el.menu_id == element.menu_id
@@ -62,6 +67,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
          this.userMenu.find((el) => {
            return el.menu_id == element.parent_menu_id
          }).user_submenu.push(element);
+         this.userMenu.find((el) => {
+          return el.menu_id == element.parent_menu_id
+        }).last_child = false;
         //  this.userMenu.find((el) => {
         //   return el.menu_id == element.menu_id
         // }).splice(element,1);
@@ -70,6 +78,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
          this.userMenu.find((el) => {
            return el.menu_id == element.parent_menu_id
          }).user_submenu.push(element);
+         this.userMenu.find((el) => {
+          return el.menu_id == element.parent_menu_id
+        }).last_child = false;
          
         //  this.userMenu.find((el) => {
         //   return el.menu_id == element.menu_id

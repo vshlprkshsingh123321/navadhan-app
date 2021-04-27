@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 import { format } from 'date-fns';
+import { DatePipe } from '@angular/common'
 
 import { ExcelDownloadService } from '../../services/excelServices/excel-download.service';
 
@@ -18,7 +19,7 @@ export class LeadTrackerComponent implements OnInit {
   branchData: any = [];
   branchDownload: boolean = false;
 
-  constructor(private _excelDownloadService: ExcelDownloadService) { }
+  constructor(private _excelDownloadService: ExcelDownloadService, private datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.branchSelect = new FormControl('', [Validators.required]);
@@ -35,11 +36,13 @@ export class LeadTrackerComponent implements OnInit {
   }
 
   downloadLeadTracker() {
-    console.log(this.branchSelect.value, format(new Date(this.fromDate.value), 'dd-MM-yyyy'), format(new Date(this.toDate.value), 'dd-MM-yyyy'))
+    // let fDate = format(new Date(this.fromDate.value), 'yyyy-MM-dd');
+    // console.log(fDate, fDate.toLocaleString());
+    // console.log(this.branchSelect.value,this.datepipe.transform(fDate, 'yyyy-MM-dd'), format(new Date(this.fromDate.value), 'dd-MM-yyyy'), format(new Date(this.toDate.value), 'dd-MM-yyyy'))
     let data = {
       branch_id: this.branchSelect.value,
-      lt_from_date: format(new Date(this.fromDate.value), 'dd-MM-yyyy'),
-      lt_to_date: format(new Date(this.toDate.value), 'dd-MM-yyyy')
+      lt_from_date: this.fromDate.value != "" ? format(new Date(this.fromDate.value), 'yyyy-MM-dd') : "",
+      lt_to_date: this.toDate.value != "" ? format(new Date(this.toDate.value), 'yyyy-MM-dd'): ""
     }
     this._excelDownloadService.downloadLt(data);
   }
